@@ -2,21 +2,21 @@
 
 import { Builder } from '@/components/Builder';
 import { Component } from '@/types/builder';
-import ArweaveWalletBtn from '@ar-dacity/ardacity-wallet-btn';
-import WalletButton from '@/components/WalletButton';
-import ArDacityNavBar from '@ar-dacity/ardacity-navbar';
+// import ArweaveWalletBtn from '@ar-dacity/ardacity-wallet-btn';
+// import WalletButton from '@/components/WalletButton';
+// import ArDacityNavBar from '@ar-dacity/ardacity-navbar';
 // import { ArdacityHeaderOne } from '@ar-dacity/ardacity-header-one';
 // import { ArdacityHeaderThree } from '@ar-dacity/ardacity-header-three';
 // import '@ar-dacity/ardacity-navbar/dist/styles.css';
-import ArweaveForm from '@/components/ArweaveForm';
-import MessageSignerForm from '@/components/MessageSignerForm';
-import ArweaveNFT from '@/components/ArweaveNFT';
-import CredentialsNavbar from '@/components/CredentialsNavbar';
-import { TextPressure } from '@ar-dacity/ardacity-text-pressure';
-import DecryptedText, { DecryptedTextProps } from '@/components/DecryptedText';
-import FlowingMenu, { FlowingMenuProps } from '@/components/FlowingMenu';
-import { downloadProject } from '@/utils/projectGenerator';
-import AOSpawner from '@/components/AOSpawner';
+// import ArweaveForm from '@/components/ArweaveForm';
+// import MessageSignerForm from '@/components/MessageSignerForm';
+// import ArweaveNFT from '@/components/ArweaveNFT';
+// import CredentialsNavbar from '@/components/CredentialsNavbar';
+// import { TextPressure } from '@ar-dacity/ardacity-text-pressure';
+// import DecryptedText, { DecryptedTextProps } from '@/components/DecryptedText';
+// import FlowingMenu, { FlowingMenuProps } from '@/components/FlowingMenu';
+// import { downloadProject } from '@/utils/projectGenerator';
+// import AOSpawner from '@/components/AOSpawner';
 // Remove the CSS imports for now since they're not available
 // We'll handle styling through the component props
 

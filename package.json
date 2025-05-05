@@ -24,6 +24,7 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "@types/three": "^0.175.0",
     "arweave": "^1.15.7",
+    "dotenv": "^16.5.0",
     "framer-motion": "^12.9.1",
     "gsap": "^3.12.7",
     "jszip": "^3.10.1",

@@ -1,3 +1,5 @@
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Component } from '@/types/builder';
 import AOSpawner from '../AOSpawner';

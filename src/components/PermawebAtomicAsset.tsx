@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { usePermawebProvider } from '../providers/PermawebProvider';
 import { connectWallet, disconnectWallet, getWalletAddress, dryrunResult } from './arweaveUtils';
@@ -10,6 +12,7 @@ interface PermawebAtomicAssetProps {
   assetIds?: string[];
   luaCode?: string;
   processId?: string;
+
 }
 
 interface Tag {
@@ -19,11 +22,21 @@ interface Tag {
 
 declare global {
   interface Window {
-    arweaveWallet: {
-      connect: (permissions: string[]) => Promise<void>;
-      getActiveAddress: () => Promise<string>;
+    arweaveWallet?: {
+      connect: (permissions: string[], appInfo?: {
+          name: string;
+          logo: string;
+      }, gateway?: {
+          host: string;
+          port: number;
+          protocol: string;
+      }) => Promise<void>;
       disconnect: () => Promise<void>;
-    };
+      getActiveAddress: () => Promise<string>;
+      getArweaveConfig?: () => Promise<{
+          host: string;
+      }>;
+  }
   }
 }
 
@@ -54,6 +67,7 @@ const PermawebAtomicAsset: React.FC<PermawebAtomicAssetProps> = ({
     }
   });
   const [dryrunResult, setDryrunResult] = useState<any>(null);
+  // Removed duplicate luaCode declaration
 
   useEffect(() => {
     const checkWallet = async () => {
@@ -226,7 +240,8 @@ const PermawebAtomicAsset: React.FC<PermawebAtomicAssetProps> = ({
 
   const handleLuaCodeChange = (value: string | undefined) => {
     if (value) {
-      setLuaCode(value);
+      console.log('Lua code changed:', value);
+      luaCode = value;
     }
   };
 
@@ -308,7 +323,7 @@ const PermawebAtomicAsset: React.FC<PermawebAtomicAssetProps> = ({
       console.log('Dryrun result:', result);
       setDryrunResult(result);
       if (onAssetCreated) {
-        onAssetCreated(result.result.id);
+        onAssetCreated(assetId || '');
       }
     } catch (err) {
       console.error('Error executing dryrun:', err);

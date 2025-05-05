@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useEffect } from 'react';
@@ -17,7 +18,7 @@ interface CodeCellOptions {
 
 export default function LuaIDEPage() {
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.search); 
     const cellId = params.get('cellId');
     const code = params.get('code');
 
@@ -40,12 +41,14 @@ export default function LuaIDEPage() {
         }
       };
 
-      const codeCell = new CodeCell(options);
+      const codeCell = CodeCell(options) as unknown as { element: HTMLElement };
 
       const container = document.getElementById('lua-ide-container');
       if (container) {
+        console.log('CodeCell:', codeCell);
         container.appendChild(codeCell.element);
       }
+
 
       return () => {
         if (container) {

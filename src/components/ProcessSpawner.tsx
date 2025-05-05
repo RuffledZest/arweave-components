@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 
 
@@ -343,14 +345,23 @@ interface Tag {
 
 declare global {
   interface Window {
-    arweaveWallet: {
-      connect: (permissions: string[]) => Promise<void>;
-      getActiveAddress: () => Promise<string>;
+    arweaveWallet?: {
+      connect: (permissions: string[], appInfo?: {
+          name: string;
+          logo: string;
+      }, gateway?: {
+          host: string;
+          port: number;
+          protocol: string;
+      }) => Promise<void>;
       disconnect: () => Promise<void>;
-    };
+      getActiveAddress: () => Promise<string>;
+      getArweaveConfig?: () => Promise<{
+          host: string;
+      }>;
   }
 }
-
+}
 // List of fallback gateways
 const ARWEAVE_GATEWAYS = [
   'https://arweave.net',

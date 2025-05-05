@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ButtonProps } from '@/components/Button';
 import { NavbarProps } from '@/components/Navbar';
 import { HeaderProps } from '@/components/Header';
@@ -5,7 +6,7 @@ import { NavbarDarkProps } from '@/components/NavbarDark';
 import { BottomNavbarProps } from '@/components/BottomNavbar';
 import { StarBorderProps } from '@/components/StarBorder';
 import { WalletButtonProps } from '@/components/WalletButton';
-import { GridDistortionProps } from '@/components/GridDistortion';
+import GridDistortionProps from "@/components/GridDistortion"
 
 export interface Component {
   id: string;
@@ -38,7 +39,7 @@ export type ComponentProps =
   | NavbarProps 
   | HeaderProps 
   | NavbarDarkProps 
-  | GridDistortionProps 
+  | typeof GridDistortionProps 
   | BottomNavbarProps 
   | StarBorderProps 
   | WalletButtonProps

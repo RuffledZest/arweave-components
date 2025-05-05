@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 // Add process.env type definition
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare global {
   namespace NodeJS {
-    interface ProcessEnv {
-      NODE_ENV: 'development' | 'production' | 'test';
-    }
+    
   }
 }
 

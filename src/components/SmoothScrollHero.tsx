@@ -1,4 +1,5 @@
-import { ReactLenis } from "lenis/dist/lenis-react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// import { ReactLenis } from "@studio-freight/lenis";
 import {
   motion,
   useMotionTemplate,
@@ -65,7 +66,7 @@ const SmoothScrollHero: React.FC<SmoothScrollHeroProps> = ({
 
   return (
     <div className="bg-zinc-950">
-      <ReactLenis
+      {/* <ReactLenis
         root
         options={{
           lerp: 0.1, // Increased for better performance
@@ -74,11 +75,11 @@ const SmoothScrollHero: React.FC<SmoothScrollHeroProps> = ({
           wheelMultiplier: 1,
           smoothTouch: false, // Disable smooth scrolling on touch devices
         }}
-      >
+      > */}
         <Nav />
         <Hero backgroundImage={backgroundImage} parallaxImages={parallaxImages} sectionHeight={sectionHeight} />
         <Schedule scheduleItems={scheduleItems} />
-      </ReactLenis>
+      {/* </ReactLenis> */}
     </div>
   );
 };

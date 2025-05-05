@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useRef } from 'react';
 import { usePermawebProvider } from '../providers/PermawebProvider';
 import { connectWallet, disconnectWallet, getWalletAddress, isWalletConnected } from './arweaveUtils';

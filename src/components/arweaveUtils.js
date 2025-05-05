@@ -1,10 +1,10 @@
 // arweaveUtils.js
-const AOModule = "Do_Uc2Sju_ffp6Ev0AnLVdPtot15rvMjP-a9VVaA5fM"; // aos 2.0.1
-const AOScheduler = "_GQ33BkPtZrqxA84vM8Zk-N2aO0toNNu_C-l-rawrBA";
-const CommonTags = [
-  { name: "Name", value: "Anon" },
-  { name: "Version", value: "0.2.1" },
-];
+// const AOModule = "Do_Uc2Sju_ffp6Ev0AnLVdPtot15rvMjP-a9VVaA5fM"; // aos 2.0.1
+// const AOScheduler = "_GQ33BkPtZrqxA84vM8Zk-N2aO0toNNu_C-l-rawrBA";
+// const CommonTags = [
+//   { name: "Name", value: "Anon" },
+//   { name: "Version", value: "0.2.1" },
+// ];
 
 import {
   dryrun

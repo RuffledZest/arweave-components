@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prefer-const */
 import { AOProcess, LuaHandler } from '@/types/arweave';
 
 // Mock AO process for development

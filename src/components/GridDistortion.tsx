@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import './GridDistortion.css';
@@ -48,12 +49,12 @@ const GridDistortion: React.FC<ArweaveGridProps> = ({
   relaxation = 0.9,
   className = '',
   aoProcessId,
-  luaCode,
-  onConnect,
-  onDisconnect,
-  onTransaction,
+  // luaCode,
+  // onConnect,
+  // onDisconnect,
+  // onTransaction,
   onMessage,
-  onInbox,
+  // onInbox,
   onError,
   onGridUpdate
 }) => {

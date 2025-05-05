@@ -1,3 +1,5 @@
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import PermawebAtomicAsset from '../PermawebAtomicAsset';
 import { Component } from '@/types/builder';

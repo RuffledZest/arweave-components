@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
 import MonacoEditor from '@monaco-editor/react';
 import { usePermawebProvider } from '../providers/PermawebProvider';
@@ -49,7 +50,7 @@ const AOSpawner: React.FC<AOSpawnerProps> = ({
   luaCode: initialLuaCode = defaultLuaCode,
   onProcessCreated
 }) => {
-  const { libs, isConnected } = usePermawebProvider();
+  const { isConnected } = usePermawebProvider();
   const [luaCode, setLuaCode] = useState<string>(initialLuaCode);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

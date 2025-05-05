@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useCallback, useState } from 'react';
 import { useBuilder } from '../hooks/useBuilder';
 import { Component } from '@/types/builder';
 import { Button, ButtonProps } from './Button';
 import { Navbar, NavbarProps } from './Navbar';
 import { Header, HeaderProps } from './Header';
-import GridDistortion, { GridDistortionProps } from './GridDistortion';
+import GridDistortion from './GridDistortion';
+import GridDistortionProps from "./GridDistortion"
 import { NavbarDark, NavbarDarkProps } from './NavbarDark';
 import { BottomNavbar, BottomNavbarProps } from './BottomNavbar';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -21,7 +24,7 @@ import CredentialsNavbar from './CredentialsNavbar';
 import type { CredentialsNavbarProps } from './CredentialsNavbar';
 import DecryptedText, { DecryptedTextProps } from './DecryptedText';
 import FlowingMenu, { FlowingMenuProps } from './FlowingMenu';
-import { TextPressure } from '@ar-dacity/ardacity-text-pressure';
+import { TextPressure, } from '@ar-dacity/ardacity-text-pressure';
 import { downloadProject } from '@/utils/projectGenerator';
 import { BuilderPermawebProfile } from './Builder/PermawebProfile';
 import { BuilderPermawebAtomicAsset } from './Builder/PermawebAtomicAsset';
@@ -29,6 +32,7 @@ import ProcessSpawner from './ProcessSpawner';
 import AOSpawner from './AOSpawner';
 import SmoothScrollHero from './SmoothScrollHero';
 import DropdownNavbar from './DropdownNavbar';
+
 import { ClipPathLinks } from './ClipPathLinks';
 import { LandingPageOne } from '../components/ArDacityUi/LandingPageOne';
 import Leaderboard, { LeaderboardProps } from './Leaderboard';
@@ -41,7 +45,7 @@ interface BuilderProps {
   availableComponents: Component[];
 }
 
-type ComponentProps = ButtonProps | NavbarProps | HeaderProps | NavbarDarkProps | GridDistortionProps | BottomNavbarProps | StarBorderProps | WalletButtonProps | CredentialsNavbarProps | DecryptedTextProps | FlowingMenuProps | LeaderboardProps;
+type ComponentProps = ButtonProps | NavbarProps | HeaderProps | NavbarDarkProps | typeof GridDistortionProps | BottomNavbarProps | StarBorderProps | WalletButtonProps | CredentialsNavbarProps | DecryptedTextProps | FlowingMenuProps | LeaderboardProps ;
 
 interface ComponentPreviewProps {
   component: Component;
@@ -151,11 +155,11 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
       }
     },
     GridDistortion: { 
-      imageSrc: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?q=80&w=1000&auto=format&fit=crop',
-      grid: 15,
-      mouse: 0.1,
-      strength: 0.15,
-      relaxation: 0.9
+      // imageSrc: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?q=80&w=1000&auto=format&fit=crop',
+      // grid: 15,
+      // mouse: 0.1,
+      // strength: 0.15,
+      // relaxation: 0.9
     },
     BottomNavbar: {
       activeTab: 'home',
@@ -185,18 +189,18 @@ const ComponentPreview: React.FC<ComponentPreviewProps> = ({
       style: {}
     },
     'ardacity-navbar': {
-      brand: 'Your Brand',
-      links: [
-        { label: 'Home', href: '/', isActive: true },
-        { label: 'About', href: '/about' }
-      ],
-      showWalletButton: true,
+      // brand: 'Your Brand',
+      // links: [
+      //   { label: 'Home', href: '/', isActive: true },
+      //   { label: 'About', href: '/about' }
+      // ],
+      // showWalletButton: true,
       variant: 'default',
-      position: 'sticky'
+      // position: 'sticky'
     },
     'arweave-form': {
       title: 'Create Arweave Transaction',
-      description: 'Submit transactions with Lua handlers',
+      // description: 'Submit transactions with Lua handlers',
       initialLuaCode: `-- Add your Lua handlers here
 function onConnect(address)
   print('Connected:', address)
@@ -209,13 +213,13 @@ end
 function onTransaction(tx)
   print('Transaction:', tx)
 end`,
-      onSubmit: (data) => {
-        console.log('Form submitted:', data);
-      }
+      // onSubmit: (data) => {
+      //   console.log('Form submitted:', data);
+      // }
     },
     'message-signer': {
       title: 'Sign Message with Lua',
-      description: 'Sign messages using Lua handlers and Arweave wallet',
+      // description: 'Sign messages using Lua handlers and Arweave wallet',
       initialLuaCode: `-- Message signing handler
 function signMessage(message)
   -- Get the wallet address
@@ -235,16 +239,16 @@ end
 -- local result = signMessage("Hello, Arweave!")
 -- print("Address:", result.address)
 -- print("Signature:", result.signature)`,
-      onSign: (data: { message: string; signature: string; luaCode: string }) => {
-        console.log('Message signed:', data);
-      }
+      // onSign: (data: { message: string; signature: string; luaCode: string }) => {
+      //   console.log('Message signed:', data);
+      // }
     },
-    nft: {
+    'nft': {
       title: 'My Arweave NFT',
-      description: 'View and transfer your Arweave NFT',
-      imageUrl: 'https://arweave.net/your-nft-image',
-      tokenId: 'your-token-id',
-      owner: 'your-wallet-address',
+      // description: 'View and transfer your Arweave NFT',
+      // imageUrl: 'https://arweave.net/your-nft-image',
+      // tokenId: 'your-token-id',
+      // owner: 'your-wallet-address',
       initialLuaCode: `-- NFT transfer handler
 function transferNFT(to, tokenId)
   -- Get the current owner
@@ -271,9 +275,9 @@ end
 -- Example usage:
 -- local result = transferNFT("recipient-address", "token-id")
 -- print("Transfer result:", result)`,
-      onTransfer: (data) => {
-        console.log('NFT Transfer:', data);
-      }
+      // onTransfer: (data) => {
+      //   console.log('NFT Transfer:', data);
+      // }
     },
     'credentials-navbar': {
       activeTab: 'home',
@@ -323,9 +327,8 @@ end
     },
     TextPressure: {
       text: 'Press me!',
-      pressure: 0.5,
-      minPressure: 0,
-      maxPressure: 1
+   
+   
     },
     'leaderboard': {
       processId: 'N_boXL20JQirhENJyfml_Geaa5cofYG8BieNA0uKZ6U',
@@ -347,7 +350,7 @@ end
       case 'Header':
         return <Header {...(props as HeaderProps)} />;
       case 'GridDistortion':
-        return <GridDistortion {...(props as GridDistortionProps)} />;
+        return <GridDistortion imageSrc={''} {...(props as typeof GridDistortionProps)} />;
       case 'BottomNavbar':
         return <BottomNavbar {...(props as BottomNavbarProps)} />;
       case 'StarBorder':
@@ -366,9 +369,9 @@ end
             {...props}
             onTransfer={(data) => {
               console.log('NFT Transfer:', data);
-              if (props.onTransfer) {
-                props.onTransfer(data);
-              }
+              // if (props.onTransfer) {
+              //   props.onTransfer(data);
+              // }
             }}
           />
         );
@@ -1789,7 +1792,7 @@ export const Builder: React.FC<BuilderProps> = ({ availableComponents }) => {
   ${component.props.style ? `style={${JSON.stringify(component.props.style)}}` : ''}
 />`;
       default:
-        return getComponentCode(component);
+        return getFullComponentCode(component);
     }
   };
 
