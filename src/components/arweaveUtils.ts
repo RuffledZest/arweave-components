@@ -37,7 +37,7 @@ const CommonTags = [
 /**
  * Check if arweave wallet is available and connected
  */
-export async function isWalletConnected(): Promise<boolean> {
+export default async function isWalletConnected(): Promise<boolean> {
   try {
     if (!window.arweaveWallet) {
       console.log('ArConnect not installed');

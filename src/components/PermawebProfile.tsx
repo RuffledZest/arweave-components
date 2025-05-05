@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, useRef } from 'react';
 import { usePermawebProvider } from '../providers/PermawebProvider';
-import { connectWallet, disconnectWallet, getWalletAddress, isWalletConnected } from './arweaveUtils';
+import { connectWallet, disconnectWallet, getWalletAddress } from './arweaveUtils';
+import isWalletConnected from './arweaveUtils';
 import LuaIDE from './LuaIDE'; // Import the LuaIDE component
 
 // Default Lua code for profile handler
