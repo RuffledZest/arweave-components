@@ -20,25 +20,25 @@ interface Tag {
   value: string;
 }
 
-declare global {
-  interface Window {
-    arweaveWallet: {
-      connect: (permissions: string[], appInfo?: {
-          name: string;
-          logo: string;
-      }, gateway?: {
-          host: string;
-          port: number;
-          protocol: string;
-      }) => Promise<void>;
-      disconnect: () => Promise<void>;
-      getActiveAddress: () => Promise<string>;
-      getArweaveConfig?: () => Promise<{
-          host: string;
-      }>;
-    } | undefined;
-  }
-}
+// declare global {
+//   interface Window {
+//     arweaveWallet: {
+//       connect: (permissions: string[], appInfo?: {
+//           name: string;
+//           logo: string;
+//       }, gateway?: {
+//           host: string;
+//           port: number;
+//           protocol: string;
+//       }) => Promise<void>;
+//       disconnect: () => Promise<void>;
+//       getActiveAddress: () => Promise<string>;
+//       getArweaveConfig?: () => Promise<{
+//           host: string;
+//       }>;
+//     } | undefined;
+//   }
+// }
 
 const PermawebAtomicAsset: React.FC<PermawebAtomicAssetProps> = ({
   onAssetCreated,

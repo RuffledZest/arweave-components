@@ -6,25 +6,25 @@ import {
   dryrun
 } from "@permaweb/aoconnect";
 
-declare global {
-  interface Window {
-    arweaveWallet?: {
-      connect: (permissions: string[], appInfo?: {
-          name: string;
-          logo: string;
-      }, gateway?: {
-          host: string;
-          port: number;
-          protocol: string;
-      }) => Promise<void>;
-      disconnect: () => Promise<void>;
-      getActiveAddress: () => Promise<string>;
-      getArweaveConfig?: () => Promise<{
-          host: string;
-      }>;
-    } | undefined;
-  }
-}
+// declare global {
+//   interface Window {
+//     arweaveWallet?: {
+//       connect: (permissions: string[], appInfo?: {
+//           name: string;
+//           logo: string;
+//       }, gateway?: {
+//           host: string;
+//           port: number;
+//           protocol: string;
+//       }) => Promise<void>;
+//       disconnect: () => Promise<void>;
+//       getActiveAddress: () => Promise<string>;
+//       getArweaveConfig?: () => Promise<{
+//           host: string;
+//       }>;
+//     } | undefined;
+//   }
+// }
 
 // Arweave frontend handlers Documentation
 const AOModule = "Do_Uc2Sju_ffp6Ev0AnLVdPtot15rvMjP-a9VVaA5fM"; // aos 2.0.1

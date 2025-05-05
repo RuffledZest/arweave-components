@@ -4,7 +4,7 @@ import ScrollReveal from '../ScrollReveal/ScrollReveal';
 import PixelTransition from '../PixelTransition/PixelTransition';
 import SplashCursor from '../SplashCursor/SplashCursor';
 import Hyperspeed from '../Hyperspeed/Hyperspeed';
-import Aurora from '../Aurora/Aurora';
+// import Aurora from '../Aurora/Aurora';
 import { connectWallet, disconnectWallet, getWalletAddress } from '../../arweaveUtils';
 
 const LandingPageOne = ({ 
@@ -14,7 +14,7 @@ const LandingPageOne = ({
     "Making Frontend and Handlers easy for you"
   ],
   description = "ArDacity UI is a collection of UI components for Arweave Ecosystem. It is designed to make frontend and arweave handlers easy for you. The components are built with React and Tailwind CSS, and they are fully customizable. You can use them in your own projects or contribute to the library.",
-  auroraColorStops = ["#3A29FF", "#FF94B4", "#FF3232"],
+  // auroraColorStops = ["#3A29FF", "#FF94B4", "#FF3232"],
   pixelTransitionImgUrl = "https://images.unsplash.com/photo-1642132652806-8aa09801c2ab?q=80&w=2060&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   pixelTransitionText = "Making for AO, On AO"
 }) => {
@@ -142,14 +142,14 @@ const LandingPageOne = ({
       </div>
 
       {/* Aurora section */}
-      <div style={{ width: '100%', height: '300px' }}>
+      {/* <div style={{ width: '100%', height: '300px' }}>
         <Aurora
           colorStops={auroraColorStops}
           blend={0.5}
           amplitude={1.0}
           speed={0.5}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
