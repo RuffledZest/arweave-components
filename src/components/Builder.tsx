@@ -1,78 +1,93 @@
+"use client"
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useCallback, useState } from 'react';
-import { useBuilder } from '../hooks/useBuilder';
-import { Component } from '@/types/builder';
-import { Button, ButtonProps } from './Button';
-import { Navbar, NavbarProps } from './Navbar';
-import { Header, HeaderProps } from './Header';
-import GridDistortion from './GridDistortion';
-import GridDistortionProps from "./GridDistortion"
-import { NavbarDark, NavbarDarkProps } from './NavbarDark';
-import { BottomNavbar, BottomNavbarProps } from './BottomNavbar';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import StarBorder from './StarBorder';
-import type { StarBorderProps } from './StarBorder';
-import WalletButton, { WalletButtonProps } from './WalletButton';
-import LuaIDE from './LuaIDE';
-import ArDacityNavBar from '@ar-dacity/ardacity-navbar';
-import ArweaveForm from './ArweaveForm';
-import MessageSignerForm from './MessageSignerForm';
-import ArweaveNFT from './ArweaveNFT';
-import CredentialsNavbar from './CredentialsNavbar';
-import type { CredentialsNavbarProps } from './CredentialsNavbar';
-import DecryptedText, { DecryptedTextProps } from './DecryptedText';
-import FlowingMenu, { FlowingMenuProps } from './FlowingMenu';
-import { TextPressure, } from '@ar-dacity/ardacity-text-pressure';
-import { downloadProject } from '@/utils/projectGenerator';
-import { BuilderPermawebProfile } from './Builder/PermawebProfile';
-import { BuilderPermawebAtomicAsset } from './Builder/PermawebAtomicAsset';
-import ProcessSpawner from './ProcessSpawner';
-import AOSpawner from './AOSpawner';
-import SmoothScrollHero from './SmoothScrollHero';
-import DropdownNavbar from './DropdownNavbar';
+import type React from "react"
+import { useCallback, useState } from "react"
+import { useBuilder } from "../hooks/useBuilder"
+import type { Component } from "@/types/builder"
+import { Button, type ButtonProps } from "./Button"
+import { Navbar, type NavbarProps } from "./Navbar"
+import { Header, type HeaderProps } from "./Header"
+import GridDistortion from "./GridDistortion"
+import type GridDistortionProps from "./GridDistortion"
+import { NavbarDark, type NavbarDarkProps } from "./NavbarDark"
+import { BottomNavbar, type BottomNavbarProps } from "./BottomNavbar"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism"
+import StarBorder from "./StarBorder"
+import type { StarBorderProps } from "./StarBorder"
+import WalletButton, { type WalletButtonProps } from "./WalletButton"
+import LuaIDE from "./LuaIDE"
+import ArDacityNavBar from "@ar-dacity/ardacity-navbar"
+import ArweaveForm from "./ArweaveForm"
+import MessageSignerForm from "./MessageSignerForm"
+import ArweaveNFT from "./ArweaveNFT"
+import CredentialsNavbar from "./CredentialsNavbar"
+import type { CredentialsNavbarProps } from "./CredentialsNavbar"
+import DecryptedText, { type DecryptedTextProps } from "./DecryptedText"
+import FlowingMenu, { type FlowingMenuProps } from "./FlowingMenu"
+import { TextPressure } from "@ar-dacity/ardacity-text-pressure"
+import { downloadProject } from "@/utils/projectGenerator"
+import { BuilderPermawebProfile } from "./Builder/PermawebProfile"
+import { BuilderPermawebAtomicAsset } from "./Builder/PermawebAtomicAsset"
+import ProcessSpawner from "./ProcessSpawner"
+import AOSpawner from "./AOSpawner"
+import SmoothScrollHero from "./SmoothScrollHero"
+import DropdownNavbar from "./DropdownNavbar"
 
-import { ClipPathLinks } from './ClipPathLinks';
-import { LandingPageOne } from '../components/ArDacityUi/LandingPageOne';
-import Leaderboard, { LeaderboardProps } from './Leaderboard';
+import { ClipPathLinks } from "./ClipPathLinks"
+import { LandingPageOne } from "../components/ArDacityUi/LandingPageOne"
+import Leaderboard, { type LeaderboardProps } from "./Leaderboard"
 // TODO: Fix LandingPageOne import once package is properly configured
 // import { LandingPageOne } from '@ar-dacity/ardacity-landing-page-one';
 // import { ArdacityHeaderOne } from '@ar-dacity/ardacity-header-one';
 // import { ArdacityHeaderThree } from '@ar-dacity/ardacity-header-three';
 
 interface BuilderProps {
-  availableComponents: Component[];
+  availableComponents: Component[]
 }
 
-type ComponentProps = ButtonProps | NavbarProps | HeaderProps | NavbarDarkProps | typeof GridDistortionProps | BottomNavbarProps | StarBorderProps | WalletButtonProps | CredentialsNavbarProps | DecryptedTextProps | FlowingMenuProps | LeaderboardProps ;
+type ComponentProps =
+  | ButtonProps
+  | NavbarProps
+  | HeaderProps
+  | NavbarDarkProps
+  | typeof GridDistortionProps
+  | BottomNavbarProps
+  | StarBorderProps
+  | WalletButtonProps
+  | CredentialsNavbarProps
+  | DecryptedTextProps
+  | FlowingMenuProps
+  | LeaderboardProps
 
 interface ComponentPreviewProps {
-  component: Component;
-  onRemove: (id: string) => void;
-  onMoveUp: (id: string) => void;
-  onMoveDown: (id: string) => void;
-  onShowCode: (id: string) => void;
-  selectedComponentId: string | null;
-  onPropertyChange: (key: string, value: any) => void;
+  component: Component
+  onRemove: (id: string) => void
+  onMoveUp: (id: string) => void
+  onMoveDown: (id: string) => void
+  onShowCode: (id: string) => void
+  selectedComponentId: string | null
+  onPropertyChange: (key: string, value: any) => void
 }
 
 const getFullComponentCode = (component: Component) => {
-  const props = { ...component.props };
+  const props = { ...component.props }
   const propString = Object.entries(props)
     .map(([key, value]) => {
-      if (typeof value === 'string') {
-        return `  ${key}="${value}"`;
+      if (typeof value === "string") {
+        return `  ${key}="${value}"`
       }
-      if (typeof value === 'object') {
-        return `  ${key}={${JSON.stringify(value, null, 2)}}`;
+      if (typeof value === "object") {
+        return `  ${key}={${JSON.stringify(value, null, 2)}}`
       }
-      return `  ${key}={${value}}`;
+      return `  ${key}={${value}}`
     })
-    .join('\n');
+    .join("\n")
 
-  return `import ${component.type} from './components/${component.type}';\n\nconst MyComponent = () => {\n  return (\n    <${component.type}\n${propString}\n    />\n  );\n};\n\nexport default MyComponent;`;
-};
+  return `import ${component.type} from './components/${component.type}';\n\nconst MyComponent = () => {\n  return (\n    <${component.type}\n${propString}\n    />\n  );\n};\n\nexport default MyComponent;`
+}
 
 const ComponentPreview: React.FC<ComponentPreviewProps> = ({ 
   component, 
@@ -415,17 +430,17 @@ end
 
   return (
     <div 
-      className="relative w-full group"
+      className="relative w-full group mb-6"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="absolute right-2 top-2 z-[100]">
-        <div className={`bg-white/90 backdrop-blur-sm rounded-full shadow-lg p-1 flex space-x-1 transition-opacity duration-200 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
+      <div className="absolute right-3 top-3 z-[100]">
+        <div className={`bg-black/90 backdrop-blur-sm rounded-lg shadow-lg p-1.5 flex space-x-1.5 transition-all duration-200 ${
+          isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}>
           <button
             onClick={handleRemove}
-            className="p-1.5 text-red-500 rounded-full hover:bg-red-50"
+            className="p-1.5 text-red-400 rounded-md hover:bg-zinc-800 hover:text-red-300 transition-colors"
             title="Delete component"
           >
             <svg
@@ -444,7 +459,7 @@ end
           </button>
           <button
             onClick={handleMoveUp}
-            className="p-1.5 text-gray-700 rounded-full hover:bg-gray-50"
+            className="p-1.5 text-zinc-400 rounded-md hover:bg-zinc-800 hover:text-white transition-colors"
             title="Move up"
           >
             <svg
@@ -463,7 +478,7 @@ end
           </button>
           <button
             onClick={handleMoveDown}
-            className="p-1.5 text-gray-700 rounded-full hover:bg-gray-50"
+            className="p-1.5 text-zinc-400 rounded-md hover:bg-zinc-800 hover:text-white transition-colors"
             title="Move down"
           >
             <svg
@@ -482,10 +497,10 @@ end
           </button>
           <button
             onClick={handleShowCode}
-            className={`p-1.5 rounded-full ${
+            className={`p-1.5 rounded-md transition-colors ${
               selectedComponentId === component.id
-                ? 'bg-blue-50 text-blue-500'
-                : 'text-gray-700 hover:bg-gray-50'
+                ? 'bg-white/20 text-white'
+                : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
             }`}
             title="Show code"
           >
@@ -516,7 +531,7 @@ end
               document.body.removeChild(a);
               URL.revokeObjectURL(url);
             }}
-            className="p-1.5 text-gray-700 rounded-full hover:bg-gray-50"
+            className="p-1.5 text-zinc-400 rounded-md hover:bg-zinc-800 hover:text-white transition-colors"
             title="Download code"
           >
             <svg
@@ -536,13 +551,17 @@ end
         </div>
       </div>
       <div className={`relative transition-all duration-200 ${
-        isHovered ? 'ring-2 ring-blue-500 ring-opacity-50' : ''
+        isHovered ? 'ring-2 ring-white ring-opacity-70 shadow-lg' : ''
       }`}>
+        <div className={`absolute -top-3 left-3 z-10 px-2 py-1 text-xs font-medium rounded ${
+          isHovered ? 'bg-white text-black' : 'bg-zinc-800 text-zinc-300'
+        } transition-colors`}>
+          {component.name}
+        </div>
         {renderComponent()}
       </div>
     </div>
-  );
-};
+  );}
 
 const PropertiesPanel: React.FC<{
   component: Component | null;
@@ -555,8 +574,13 @@ const PropertiesPanel: React.FC<{
 }> = ({ component, onPropertyChange, onRemove, onMoveUp, onMoveDown, onShowCode, selectedComponentId }) => {
   if (!component) {
     return (
-      <div className="p-4 text-center text-gray-500">
-        Select a component to edit its properties
+      <div className="flex flex-col items-center justify-center h-64 p-6 text-zinc-500">
+        <svg className="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <p className="text-lg">No Component Selected</p>
+        <p className="text-sm mt-2 text-center">Select a component from the canvas to edit its properties</p>
       </div>
     );
   }
@@ -613,7 +637,7 @@ const PropertiesPanel: React.FC<{
                 <input
                   type="number"
                   value={component.props.addressDisplayLength || 6}
-                  onChange={(e) => onPropertyChange('addressDisplayLength', parseInt(e.target.value))}
+                  onChange={(e) => onPropertyChange('addressDisplayLength', Number.parseInt(e.target.value))}
                   className="w-full p-2 border rounded-md"
                   min="4"
                   max="64"
@@ -791,7 +815,7 @@ const PropertiesPanel: React.FC<{
               <input
                 type="number"
                 value={component.props.grid || 10}
-                onChange={(e) => onPropertyChange('grid', parseInt(e.target.value))}
+                onChange={(e) => onPropertyChange('grid', Number.parseInt(e.target.value))}
                 className="w-full p-2 border rounded-md"
                 min="1"
                 max="20"
@@ -804,7 +828,7 @@ const PropertiesPanel: React.FC<{
               <input
                 type="number"
                 value={component.props.mouse || 0.5}
-                onChange={(e) => onPropertyChange('mouse', parseFloat(e.target.value))}
+                onChange={(e) => onPropertyChange('mouse', Number.parseFloat(e.target.value))}
                 className="w-full p-2 border rounded-md"
                 min="0"
                 max="1"
@@ -818,7 +842,7 @@ const PropertiesPanel: React.FC<{
               <input
                 type="number"
                 value={component.props.strength || 0.5}
-                onChange={(e) => onPropertyChange('strength', parseFloat(e.target.value))}
+                onChange={(e) => onPropertyChange('strength', Number.parseFloat(e.target.value))}
                 className="w-full p-2 border rounded-md"
                 min="0"
                 max="1"
@@ -832,7 +856,7 @@ const PropertiesPanel: React.FC<{
               <input
                 type="number"
                 value={component.props.relaxation || 0.5}
-                onChange={(e) => onPropertyChange('relaxation', parseFloat(e.target.value))}
+                onChange={(e) => onPropertyChange('relaxation', Number.parseFloat(e.target.value))}
                 className="w-full p-2 border rounded-md"
                 min="0"
                 max="1"
@@ -1089,7 +1113,7 @@ const PropertiesPanel: React.FC<{
               <input
                 type="number"
                 value={component.props.speed || 50}
-                onChange={(e) => onPropertyChange('speed', parseInt(e.target.value))}
+                onChange={(e) => onPropertyChange('speed', Number.parseInt(e.target.value))}
                 className="w-full p-2 border rounded-md"
                 min="10"
                 max="1000"
@@ -1102,7 +1126,7 @@ const PropertiesPanel: React.FC<{
               <input
                 type="number"
                 value={component.props.maxIterations || 10}
-                onChange={(e) => onPropertyChange('maxIterations', parseInt(e.target.value))}
+                onChange={(e) => onPropertyChange('maxIterations', Number.parseInt(e.target.value))}
                 className="w-full p-2 border rounded-md"
                 min="1"
                 max="50"
@@ -1342,7 +1366,7 @@ const PropertiesPanel: React.FC<{
               <input
                 type="number"
                 value={component.props.minFontSize || 36}
-                onChange={(e) => onPropertyChange('minFontSize', parseInt(e.target.value))}
+                onChange={(e) => onPropertyChange('minFontSize', Number.parseInt(e.target.value))}
                 className="w-full p-2 border rounded-md"
                 min="12"
                 max="72"
@@ -1519,7 +1543,7 @@ const PropertiesPanel: React.FC<{
               <select
                 className="w-full p-2 border rounded-md"
                 value={component.props.limit || 10}
-                onChange={(e) => onPropertyChange('limit', parseInt(e.target.value))}
+                onChange={(e) => onPropertyChange('limit', Number.parseInt(e.target.value))}
               >
                 <option value={5}>5</option>
                 <option value={10}>10</option>
@@ -1535,16 +1559,21 @@ const PropertiesPanel: React.FC<{
   };
 
   return (
-    <div className="p-4">
-      <h3 className="text-lg font-semibold mb-4">{component.name} Properties</h3>
+    <div className="text-white">
+      <h3 className="text-lg font-semibold mb-4 px-4 pt-4">{component.name}</h3>
       
       {/* Features Section */}
-      <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-        <h4 className="text-sm font-medium text-gray-700 mb-3">Features</h4>
+      <div className="mb-6 p-4 bg-zinc-900 rounded-lg mx-4">
+        <h4 className="text-sm font-medium text-zinc-300 mb-3 flex items-center">
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+          </svg>
+          Actions
+        </h4>
         <div className="space-y-2">
           <button
             onClick={() => onRemove?.(component.id)}
-            className="w-full flex items-center justify-center px-4 py-2 text-sm text-red-600 bg-white border border-red-200 rounded-md hover:bg-red-50 hover:border-red-300 transition-colors"
+            className="w-full flex items-center justify-center px-4 py-2 text-sm text-red-400 bg-zinc-900 border border-zinc-800 rounded-md hover:bg-zinc-800 hover:border-zinc-700 transition-colors"
           >
             <svg
               className="w-4 h-4 mr-2"
@@ -1564,7 +1593,7 @@ const PropertiesPanel: React.FC<{
           <div className="flex space-x-2">
             <button
               onClick={() => onMoveUp?.(component.id)}
-              className="flex-1 flex items-center justify-center px-4 py-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-md hover:bg-gray-50 hover:border-gray-300 transition-colors"
+              className="flex-1 flex items-center justify-center px-4 py-2 text-sm text-white bg-zinc-900 border border-zinc-800 rounded-md hover:bg-zinc-800 hover:border-zinc-700 transition-colors"
             >
               <svg
                 className="w-4 h-4 mr-2"
@@ -1583,7 +1612,7 @@ const PropertiesPanel: React.FC<{
             </button>
             <button
               onClick={() => onMoveDown?.(component.id)}
-              className="flex-1 flex items-center justify-center px-4 py-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-md hover:bg-gray-50 hover:border-gray-300 transition-colors"
+              className="flex-1 flex items-center justify-center px-4 py-2 text-sm text-white bg-zinc-900 border border-zinc-800 rounded-md hover:bg-zinc-800 hover:border-zinc-700 transition-colors"
             >
               <svg
                 className="w-4 h-4 mr-2"
@@ -1603,7 +1632,11 @@ const PropertiesPanel: React.FC<{
           </div>
           <button
             onClick={() => onShowCode?.(component.id)}
-            className="w-full flex items-center justify-center px-4 py-2 text-sm text-blue-600 bg-white border border-blue-200 rounded-md hover:bg-blue-50 hover:border-blue-300 transition-colors"
+            className={`w-full flex items-center justify-center px-4 py-2 text-sm ${
+              selectedComponentId === component.id
+                ? 'text-white bg-white/10 border-white/30'
+                : 'text-white bg-zinc-900 border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700'
+            } border rounded-md transition-colors`}
           >
             <svg
               className="w-4 h-4 mr-2"
@@ -1633,7 +1666,7 @@ const PropertiesPanel: React.FC<{
               document.body.removeChild(a);
               URL.revokeObjectURL(url);
             }}
-            className="w-full flex items-center justify-center px-4 py-2 text-sm text-green-600 bg-white border border-green-200 rounded-md hover:bg-green-50 hover:border-green-300 transition-colors"
+            className="w-full flex items-center justify-center px-4 py-2 text-sm text-white bg-zinc-900 border border-zinc-800 rounded-md hover:bg-zinc-800 hover:border-zinc-700 transition-colors"
           >
             <svg
               className="w-4 h-4 mr-2"
@@ -1654,16 +1687,29 @@ const PropertiesPanel: React.FC<{
       </div>
 
       {/* Component Properties */}
-      <div className="space-y-4">
-        {renderProperties()}
+      <div className="space-y-4 px-4 pb-6">
+        <h4 className="text-sm font-medium text-zinc-300 mb-3 flex items-center">
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          Properties
+        </h4>
+        <div className="bg-zinc-900 rounded-lg p-4 space-y-4">
+          {renderProperties()}
+        </div>
       </div>
 
       {/* Code Preview */}
       {selectedComponentId === component.id && (
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <h4 className="text-sm font-medium text-gray-700 mb-3">Code Preview</h4>
-          <div className="relative">
-            <SyntaxHighlighter language="jsx" style={atomDark}>
+        <div className="mt-6 p-4 bg-zinc-900 rounded-lg mx-4 mb-6">
+          <h4 className="text-sm font-medium text-zinc-300 mb-3 flex items-center">
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            Code Preview
+          </h4>
+          <div className="relative rounded-lg overflow-hidden">
+            <SyntaxHighlighter language="jsx" style={atomDark} className="text-sm">
               {getFullComponentCode(component)}
             </SyntaxHighlighter>
             <button
@@ -1671,7 +1717,7 @@ const PropertiesPanel: React.FC<{
                 const code = getFullComponentCode(component);
                 navigator.clipboard.writeText(code);
               }}
-              className="absolute top-2 right-2 p-2 text-gray-400 hover:text-gray-600 bg-white/50 rounded-md hover:bg-white/80 transition-colors"
+              className="absolute top-2 right-2 p-2 text-zinc-400 hover:text-white bg-zinc-900/90 rounded-md hover:bg-zinc-800 transition-colors"
               title="Copy code"
             >
               <svg
@@ -1799,20 +1845,27 @@ export const Builder: React.FC<BuilderProps> = ({ availableComponents }) => {
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Components Panel */}
-      <div className="w-64 flex-shrink-0 bg-gray-100 overflow-y-auto">
+      <div className="w-72 flex-shrink-0 bg-black overflow-y-auto border-r border-zinc-800">
         <div className="p-4">
-          <h2 className="text-lg font-semibold mb-4">Components</h2>
-          <div className="space-y-2">
+          <h2 className="text-xl font-semibold mb-4 text-white flex items-center">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+            Components
+          </h2>
+          <div className="grid grid-cols-2 gap-2">
             {availableComponents.map((component) => (
               <div
                 key={component.id}
                 draggable
                 onDragStart={(e) => handleDragStart(e, component)}
-                className="p-3 bg-white rounded-lg shadow-sm border border-gray-200 cursor-move hover:shadow-md hover:border-blue-500 transition-all"
+                className="p-3 bg-zinc-900 rounded-lg shadow-sm border border-zinc-800 cursor-move hover:shadow-md hover:border-white hover:bg-zinc-800 transition-all group"
               >
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                  <span className="font-medium text-gray-700">{component.name}</span>
+                <div className="flex flex-col items-center justify-center space-y-2">
+                  <div className="w-8 h-8 flex items-center justify-center rounded-full bg-zinc-800 text-white group-hover:bg-zinc-700 transition-colors">
+                    {component.type.charAt(0).toUpperCase()}
+                  </div>
+                  <span className="font-medium text-center text-zinc-400 text-sm group-hover:text-white transition-colors">{component.name}</span>
                 </div>
               </div>
             ))}
@@ -1821,44 +1874,61 @@ export const Builder: React.FC<BuilderProps> = ({ availableComponents }) => {
       </div>
 
       {/* Builder Canvas */}
-      <div className="flex-1 flex flex-col min-h-0">
+      <div className="flex-1 flex flex-col min-h-0 bg-black">
         {/* Toolbar */}
-        <div className="flex-shrink-0 p-2 bg-gray-100 border-b">
+        <div className="flex-shrink-0 p-3 bg-black border-b border-zinc-800">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-3">
               <button
                 onClick={() => setIsPreviewMode(!isPreviewMode)}
-                className={`px-3 py-1 rounded ${
+                className={`px-4 py-2 rounded-md flex items-center transition-colors ${
                   isPreviewMode
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-white text-gray-700'
+                    ? 'bg-white text-black hover:bg-zinc-200'
+                    : 'bg-zinc-900 text-white hover:bg-zinc-800'
                 }`}
               >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                    d={isPreviewMode ? "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" : "M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"} 
+                  />
+                </svg>
                 {isPreviewMode ? 'Edit Mode' : 'Preview Mode'}
               </button>
             </div>
             <button
               onClick={() => downloadProject(state.dropZones.flatMap(zone => zone.children))}
-              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+              className="px-4 py-2 bg-white text-black rounded-md hover:bg-zinc-200 transition-colors flex items-center"
             >
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
               Download Project
             </button>
           </div>
         </div>
 
         {/* Canvas Area */}
-        <div className="flex-1 overflow-y-auto p-4 bg-white">
+        <div className="flex-1 overflow-y-auto p-6 bg-black">
           <div
             className={`min-h-full ${
-              isPreviewMode ? '' : 'border-2 border-dashed border-gray-300'
-            } rounded p-4`}
+              isPreviewMode ? '' : 'border-2 border-dashed border-zinc-800 bg-zinc-900/20'
+            } rounded-lg p-6`}
             onDrop={(e) => {
               handleDrop(e, 'root');
               setSelectedComponentId(null);
             }}
             onDragOver={handleDragOver}
           >
-            <div className="space-y-4">
+            {state.dropZones.flatMap(zone => zone.children).length === 0 && !isPreviewMode && (
+              <div className="flex flex-col items-center justify-center h-64 text-zinc-500">
+                <svg className="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <p className="text-lg">Drag and drop components here</p>
+                <p className="text-sm mt-2">Components will appear in this canvas area</p>
+              </div>
+            )}
+            <div className="space-y-6">
               {state.dropZones.map((zone) => (
                 <div key={zone.id} className="w-full">
                   {zone.children.map((component) => (
@@ -1885,7 +1955,16 @@ export const Builder: React.FC<BuilderProps> = ({ availableComponents }) => {
       </div>
 
       {/* Properties Panel */}
-      <div className="w-80 flex-shrink-0 border-l bg-white overflow-y-auto">
+      <div className="w-80 flex-shrink-0 border-l border-zinc-800 bg-black overflow-y-auto">
+        <div className="sticky top-0 z-10 bg-black border-b border-zinc-800 p-4">
+          <h2 className="text-xl font-semibold text-white flex items-center">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Properties
+          </h2>
+        </div>
         <PropertiesPanel
           component={getSelectedComponent()}
           onPropertyChange={(key, value) => {
@@ -1902,4 +1981,4 @@ export const Builder: React.FC<BuilderProps> = ({ availableComponents }) => {
       </div>
     </div>
   );
-}; 
+};
