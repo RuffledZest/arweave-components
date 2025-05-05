@@ -22,7 +22,7 @@ interface Tag {
 
 declare global {
   interface Window {
-    arweaveWallet?: {
+    arweaveWallet: {
       connect: (permissions: string[], appInfo?: {
           name: string;
           logo: string;
@@ -36,7 +36,7 @@ declare global {
       getArweaveConfig?: () => Promise<{
           host: string;
       }>;
-  }
+    } | undefined;
   }
 }
 

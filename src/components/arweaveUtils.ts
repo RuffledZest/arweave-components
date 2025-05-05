@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   message,
   createDataItemSigner,
@@ -7,15 +9,20 @@ import {
 declare global {
   interface Window {
     arweaveWallet?: {
-      connect: (
-        permissions: string[],
-        appInfo?: { name: string; logo: string },
-        gateway?: { host: string; port: number; protocol: string }
-      ) => Promise<void>;
+      connect: (permissions: string[], appInfo?: {
+          name: string;
+          logo: string;
+      }, gateway?: {
+          host: string;
+          port: number;
+          protocol: string;
+      }) => Promise<void>;
       disconnect: () => Promise<void>;
       getActiveAddress: () => Promise<string>;
-      getArweaveConfig?: () => Promise<{ host: string }>;
-    };
+      getArweaveConfig?: () => Promise<{
+          host: string;
+      }>;
+    } | undefined;
   }
 }
 
