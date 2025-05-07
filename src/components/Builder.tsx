@@ -63,6 +63,7 @@ type ComponentProps =
   | LeaderboardProps
 
 interface ComponentPreviewProps {
+  key: string
   component: Component
   onRemove: (id: string) => void
   onMoveUp: (id: string) => void
@@ -1709,9 +1710,7 @@ const PropertiesPanel: React.FC<{
             Code Preview
           </h4>
           <div className="relative rounded-lg overflow-hidden">
-            <SyntaxHighlighter language="jsx" style={atomDark} className="text-sm">
-              {getFullComponentCode(component)}
-            </SyntaxHighlighter>
+            
             <button
               onClick={() => {
                 const code = getFullComponentCode(component);
@@ -1741,7 +1740,7 @@ const PropertiesPanel: React.FC<{
   );
 };
 
-export const Builder: React.FC<BuilderProps> = ({ availableComponents }) => {
+const Builder: React.FC<BuilderProps> = ({ availableComponents }) => {
   const { state, addComponent, removeComponent, selectComponent, moveComponent, updateComponent } = useBuilder();
   const [isPreviewMode, setIsPreviewMode] = useState(false);
   const [selectedComponentId, setSelectedComponentId] = useState<string | null>(null);
@@ -1982,3 +1981,4 @@ export const Builder: React.FC<BuilderProps> = ({ availableComponents }) => {
     </div>
   );
 };
+export default Builder;

@@ -1,24 +1,15 @@
 'use client';
-
-import { Builder } from '@/components/Builder';
+import dynamic from 'next/dynamic';
 import { Component } from '@/types/builder';
-// import ArweaveWalletBtn from '@ar-dacity/ardacity-wallet-btn';
-// import WalletButton from '@/components/WalletButton';
-// import ArDacityNavBar from '@ar-dacity/ardacity-navbar';
-// import { ArdacityHeaderOne } from '@ar-dacity/ardacity-header-one';
-// import { ArdacityHeaderThree } from '@ar-dacity/ardacity-header-three';
-// import '@ar-dacity/ardacity-navbar/dist/styles.css';
-// import ArweaveForm from '@/components/ArweaveForm';
-// import MessageSignerForm from '@/components/MessageSignerForm';
-// import ArweaveNFT from '@/components/ArweaveNFT';
-// import CredentialsNavbar from '@/components/CredentialsNavbar';
-// import { TextPressure } from '@ar-dacity/ardacity-text-pressure';
-// import DecryptedText, { DecryptedTextProps } from '@/components/DecryptedText';
-// import FlowingMenu, { FlowingMenuProps } from '@/components/FlowingMenu';
-// import { downloadProject } from '@/utils/projectGenerator';
-// import AOSpawner from '@/components/AOSpawner';
-// Remove the CSS imports for now since they're not available
-// We'll handle styling through the component props
+
+// Dynamic import with SSR disabled
+const Builder = dynamic(() => import('../components/Builder'), {
+  ssr: false,
+});
+
+// Dynamically load your component
+
+
 
 const availableComponents: Component[] = [
   {
@@ -666,63 +657,11 @@ return { process_id = process_id }`
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* <ArweaveWalletBtn /> */}
-      {/* <ArDacityNavBar /> */} 
-      {/* <ArDacityNavBar 
-        links={[
-          { label: 'Home', href: '/', isActive: true },
-          { label: 'About', href: '/about' },
-          { label: 'Projects', href: '/projects' },
-          { label: 'Contact', href: '/contact' }
-        ]}
-        showWalletButton={true}
-      /> */}
+     
           <div className="App">
-      {/* <ArdacityHeaderThree 
-        imageSrc="https://picsum.photos/1920/1080?grayscale"
-        title="My Arweave Project"
-        links={[
-          { name: "Home", href: "/" },
-          { name: "About", href: "/about" },
-          { name: "Contact", href: "/contact" }
-        ]}
-        grid={10}
-        mouse={0.1}
-        strength={0.15}
-        relaxation={0.9}
-      /> */}
-      {/* Your other content */}
+     
     </div>
 
-      {/* <ArdacityHeaderOne 
-      name="Vibhansh Alok"
-      title="Web Developer"
-      navLinks={[
-        { label: 'Home', href: '#', isActive: true },
-        { label: 'Projects', href: '#projects' },
-        { label: 'About', href: '#about' },
-        { label: 'Contact', href: '#contact' }
-      ]}
-      images={[
-        "/image1.jpeg",
-        "/image2.jpeg",
-        "/image3.jpeg"
-      ]}
-    /> */}
-    {/* <div style={{position: 'relative', height: '700px'}}>
-  <TextPressure
-    text="Ardacity!"
-    flex={true}
-    alpha={false}
-    stroke={false}
-    width={true}
-    weight={true}
-    italic={true}
-    textColor="#000"
-    strokeColor="#ff0000"
-    minFontSize={36}
-  />
-</div> */}
       <Builder availableComponents={availableComponents} />
     </main>
   );
