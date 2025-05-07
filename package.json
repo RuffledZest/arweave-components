@@ -11,8 +11,9 @@
   "dependencies": {
     "@ar-dacity/ardacity-aurora": "^1.0.2",
     "@ar-dacity/ardacity-header-one": "^0.1.0",
+    "@ar-dacity/ardacity-pixel-transition": "^0.1.1",
     "@ar-dacity/ardacity-header-three": "^0.1.1",
-    "@ar-dacity/ardacity-landing-page-one": "^1.0.1",
+    "@ar-dacity/ardacity-landing-page-one": "^1.0.2",
     "@ar-dacity/ardacity-navbar": "^0.1.0",
     "@ar-dacity/ardacity-scroll-reveal": "^1.0.1",
     "@ar-dacity/ardacity-text-pressure": "^1.0.7",

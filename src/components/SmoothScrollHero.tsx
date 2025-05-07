@@ -76,7 +76,7 @@ const SmoothScrollHero: React.FC<SmoothScrollHeroProps> = ({
           smoothTouch: false, // Disable smooth scrolling on touch devices
         }}
       > */}
-        <Nav />
+        {/* <Nav /> */}
         <Hero backgroundImage={backgroundImage} parallaxImages={parallaxImages} sectionHeight={sectionHeight} />
         <Schedule scheduleItems={scheduleItems} />
       {/* </ReactLenis> */}
@@ -84,23 +84,23 @@ const SmoothScrollHero: React.FC<SmoothScrollHeroProps> = ({
   );
 };
 
-const Nav = () => {
-  return (
-    <nav className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-3 text-white">
-      <SiSpacex className="text-3xl mix-blend-difference" />
-      <button
-        onClick={() => {
-          document.getElementById("launch-schedule")?.scrollIntoView({
-            behavior: "smooth",
-          });
-        }}
-        className="flex items-center gap-1 text-xs text-zinc-400"
-      >
-        LAUNCH SCHEDULE <FiArrowRight />
-      </button>
-    </nav>
-  );
-};
+// const Nav = () => {
+//   return (
+//     <nav className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-3 text-white">
+//       <SiSpacex className="text-3xl mix-blend-difference" />
+//       <button
+//         onClick={() => {
+//           document.getElementById("launch-schedule")?.scrollIntoView({
+//             behavior: "smooth",
+//           });
+//         }}
+//         className="flex items-center gap-1 text-xs text-zinc-400"
+//       >
+//         LAUNCH SCHEDULE <FiArrowRight />
+//       </button>
+//     </nav>
+//   );
+// };
 
 interface HeroProps {
   backgroundImage: string;
@@ -114,6 +114,9 @@ const Hero: React.FC<HeroProps> = ({ backgroundImage, parallaxImages, sectionHei
       style={{ height: `calc(${sectionHeight}px + 100vh)` }}
       className="relative w-full"
     >
+      <h1 
+      className="absolute top-0 left-0 right-0 z-10 mx-auto max-w-5xl px-4 pt-[200px] text-center text-8xl font-black uppercase text-zinc-50"
+      >ArDacity NFT</h1>
       <CenterImage backgroundImage={backgroundImage} sectionHeight={sectionHeight} />
       <ParallaxImages images={parallaxImages} sectionHeight={sectionHeight} />
       <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-b from-zinc-950/0 to-zinc-950" />
@@ -226,7 +229,7 @@ const Schedule: React.FC<ScheduleProps> = ({ scheduleItems }) => {
         transition={{ ease: "easeInOut", duration: 0.75 }}
         className="mb-20 text-4xl font-black uppercase text-zinc-50"
       >
-        Launch Schedule
+        Browse NFTs
       </motion.h1>
       {scheduleItems?.map((item, index) => (
         <ScheduleItem key={index} {...item} />

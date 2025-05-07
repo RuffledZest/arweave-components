@@ -1715,7 +1715,7 @@ const PropertiesPanel: React.FC<{
             <button
               onClick={() => {
                 const code = getFullComponentCode(component);
-                navigator.clipboard.writeText(code);
+                // navigator.clipboard.writeText(code);
               }}
               className="absolute top-2 right-2 p-2 text-zinc-400 hover:text-white bg-zinc-900/90 rounded-md hover:bg-zinc-800 transition-colors"
               title="Copy code"
